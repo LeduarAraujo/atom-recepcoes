@@ -1,0 +1,200 @@
+openapi: 3.0.3
+info:
+  title: Swagger Agenda de Recepções dos Espaços - OpenAPI 3.0
+  description: |-
+    Contrato do Atomico responsavel por gerenciar os dados de usuarios
+  contact:
+    email: leduar.araujo@hotmail.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.11
+
+tags:
+  - name: Usuario
+    description: Dados dos usuarios
+  - name: Espaco
+    description: Dados dos espacos
+  - name: Agendamento
+    description: Dados dos agendamentos dos espacos
+
+paths:
+  # Rotas que não exigem autenticação
+  /api/v1/signin:
+    post:
+      operationId: iniciarSessao
+      tags:
+        - Usuario
+      summary: Realiza o login do usuario
+      description: Realiza o login do usuario
+
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SigninUsuarioRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SigninUsuarioResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+
+  # Rotas que exigem autenticação
+  /api/v1/cadastrofuncionario:
+    post:
+      operationId: cadastroFuncionario
+      tags:
+        - Usuario
+      summary: Realiza o cadastro do usuario
+      description: Realiza o cadastro do usuario
+      parameters:
+        - name: token_jwt
+          in: header
+          required: true
+          schema:
+            type: string
+        - name: idFuncionario
+          in: header
+          required: true
+          schema:
+            type: integer
+            format: int64
+
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CadastroFuncionarioRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SucessMessage'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+        - gerenciador:
+            - write
+            - read
+
+components:
+  schemas:
+    SigninUsuarioRequest:
+      type: object
+      properties:
+        login:
+          type: string
+          example: "hello.world"
+        senha:
+          type: string
+          example: "h3ll0"
+
+    SigninUsuarioResponse:
+      type: object
+      properties:
+        token_jwt:
+          type: string
+          example: "yuiyasidya87sd6as87datys8d76atsdy6as87d6ytas87d6ytas78d6ytas8d6"
+        dados:
+          type: object
+          properties:
+            schema:
+                $ref: '#/components/schemas/getUsuarioLogadoResponse'
+
+    getUsuarioLogadoResponse:
+      type: object
+      properties:
+        idUsuarioLogado:
+          type: integer
+          format: int64
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+        birthday:
+          type: string
+        login:
+          type: string
+        phone:
+          type: string
+        createdAt:
+          type: string
+        lastLogin:
+          type: string
+
+    CadastroFuncionarioRequest:
+      type: object
+      properties:
+        nmUsuario:
+          type: string
+          example: "Napoleao Bonaparte"
+
+    SucessMessage:
+      type: object
+      properties:
+        message:
+          type: string
+          example: "Sucesso"
+        code:
+          type: integer
+          example: 0
+
+    ErrorMessage:
+      type: object
+      properties:
+        message:
+          type: string
+          example: "Error message"
+        errorCode:
+          type: integer
+          example: 123
+
+  securitySchemes:
+    gerenciador:
+      type: oauth2
+      flows:
+        implicit:
+          authorizationUrl: https://petstore3.swagger.io/oauth/authorize
+          scopes:
+            write: escrita
+            read: leitura
+    api_key:
+      type: apiKey
+      name: api_key
+      in: header
