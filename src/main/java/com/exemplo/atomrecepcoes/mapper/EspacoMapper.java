@@ -30,10 +30,12 @@ public class EspacoMapper {
     public static EspacoEntity representationToEntity(String nmEspaco, String dsEndereco,
         MultipartFile logoEspaco) {   
         EspacoEntity espaco = new EspacoEntity();
+        espaco.setNmEspaco(nmEspaco);
+        espaco.setDsEndereco(dsEndereco);
         try {
-            espaco.setNmEspaco(nmEspaco);
-            espaco.setDsEndereco(dsEndereco);
-            espaco.setLogoEspaco(logoEspaco.getBytes());
+            if (logoEspaco != null && logoEspaco.getBytes().length > 0) {
+                espaco.setLogoEspaco(logoEspaco.getBytes());
+            }
         } catch (IOException e) {
         }
 
