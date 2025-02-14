@@ -133,7 +133,7 @@ paths:
 
       requestBody:
         content:
-          application/json:
+          multipart/form-data:
             schema:
               $ref: '#/components/schemas/CadastroEspacoRequest'
         required: true
@@ -290,8 +290,15 @@ components:
     CadastroEspacoRequest:
       type: object
       properties:
-        schema:
-          $ref: '#/components/schemas/DadosEspaco'
+        nmEspaco:
+          type: string
+          example: "espaco 1"
+        dsEndereco:
+          type: string
+          example: "rua do sol n 23, recife-PE"
+        logoEspaco:
+            type: string
+            format: binary
 
     ListaEspacosResponse:
       type: object
@@ -330,6 +337,7 @@ components:
           scopes:
             write: escrita
             read: leitura
+
     api_key:
       type: apiKey
       name: api_key

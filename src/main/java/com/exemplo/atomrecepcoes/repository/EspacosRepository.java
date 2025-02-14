@@ -11,6 +11,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 @Repository
 public interface EspacosRepository extends JpaRepository<EspacoEntity, Long> {
 
+    EspacoEntity save(EspacoEntity espaco);
+
     List<EspacoEntity> findAll();
     
 }

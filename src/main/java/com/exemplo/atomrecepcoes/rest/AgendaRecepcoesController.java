@@ -2,9 +2,9 @@ package com.exemplo.atomrecepcoes.rest;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.baeldung.openapi.api.ApiApi;
-import com.baeldung.openapi.model.CadastroEspacoRequestRepresentation;
 import com.baeldung.openapi.model.CadastroFuncionarioRequestRepresentation;
 import com.baeldung.openapi.model.ListaEspacosResponseRepresentation;
 import com.baeldung.openapi.model.SigninUsuarioRequestRepresentation;
@@ -45,10 +45,10 @@ public class AgendaRecepcoesController implements ApiApi {
 
     @Override
     public ResponseEntity<SucessMessageRepresentation> incluirEspaco(String tokenJwt, Long idFuncionario,
-            CadastroEspacoRequestRepresentation cadastroEspacoRequestRepresentation) {
+            String nmEspaco, String dsEndereco, MultipartFile logoEspaco) {
         try {
-            // return ResponseEntity.ok().body();
-            return ApiApi.super.incluirEspaco(tokenJwt, idFuncionario, cadastroEspacoRequestRepresentation);
+            return ResponseEntity.ok().body(service.incluirEspaco(tokenJwt, idFuncionario,
+            nmEspaco, dsEndereco, logoEspaco));
         } catch (Exception ex) {
             return (ResponseEntity) ErrorFormat.convertToEntity(ex);
         } 
