@@ -11,8 +11,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 @Repository
 public interface EspacosRepository extends JpaRepository<EspacoEntity, Long> {
 
+    @SuppressWarnings({ "null", "unchecked" })
     EspacoEntity save(EspacoEntity espaco);
 
+    @SuppressWarnings("null")
     List<EspacoEntity> findAll();
     
 }

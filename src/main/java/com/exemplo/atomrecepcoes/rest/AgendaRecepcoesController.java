@@ -21,6 +21,7 @@ public class AgendaRecepcoesController implements ApiApi {
 
     private final AgendaRecepcoesService service;
     
+    @SuppressWarnings({ "rawtypes", "unchecked" })
     @Override
     public ResponseEntity<SigninUsuarioResponseRepresentation> iniciarSessao(
             SigninUsuarioRequestRepresentation signinUsuarioRequestRepresentation) {
@@ -32,6 +33,7 @@ public class AgendaRecepcoesController implements ApiApi {
         }
     }
 
+    @SuppressWarnings({ "rawtypes", "unchecked" })
     @Override
     public ResponseEntity<SucessMessageRepresentation> cadastroFuncionario(String tokenJwt, Long idFuncionario,
             CadastroFuncionarioRequestRepresentation cadastroFuncionarioRequestRepresentation) {
@@ -43,6 +45,7 @@ public class AgendaRecepcoesController implements ApiApi {
         }
     }
 
+    @SuppressWarnings({ "rawtypes", "unchecked" })
     @Override
     public ResponseEntity<SucessMessageRepresentation> incluirEspaco(String tokenJwt, Long idFuncionario,
             String nmEspaco, String dsEndereco, MultipartFile logoEspaco) {
@@ -54,6 +57,7 @@ public class AgendaRecepcoesController implements ApiApi {
         } 
     }
 
+    @SuppressWarnings({ "rawtypes", "unchecked" })
     @Override
     public ResponseEntity<ListaEspacosResponseRepresentation> listarEspacos(String tokenJwt, Long idFuncionario) {
         try {
