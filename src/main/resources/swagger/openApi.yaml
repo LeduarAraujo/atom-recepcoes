@@ -111,6 +111,112 @@ paths:
             - write
             - read
 
+  /api/v1/incluirespaco:
+    post:
+      operationId: incluirEspaco
+      tags:
+        - Espaco
+      summary: Realiza o cadastro do espaco
+      description: Realiza o cadastro do espaco
+      parameters:
+        - name: token_jwt
+          in: header
+          required: true
+          schema:
+            type: string
+        - name: idFuncionario
+          in: header
+          required: true
+          schema:
+            type: integer
+            format: int64
+
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CadastroEspacoRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SucessMessage'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+        - gerenciador:
+            - write
+            - read
+            
+  /api/v1/listarespacos:
+    get:
+      operationId: listarEspacos
+      tags:
+        - Espaco
+      summary: Lista todos os Espacos
+      description: Lista todos os espacos cadastrados
+      parameters:
+        - name: token_jwt
+          in: header
+          required: true
+          schema:
+            type: string
+        - name: idFuncionario
+          in: header
+          required: true
+          schema:
+            type: integer
+            format: int64
+
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListaEspacosResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+        - gerenciador:
+            - write
+            - read
+
 components:
   schemas:
     SigninUsuarioRequest:
@@ -164,6 +270,36 @@ components:
         nmUsuario:
           type: string
           example: "Napoleao Bonaparte"
+
+    DadosEspaco:
+      type: object
+      properties:
+        cdEspaco:
+          type: integer
+        nmEspaco:
+          type: string
+          example: "espaco 1"
+        dsEndereco:
+          type: string
+          example: "rua do sol n 23, recife-PE"
+        logoEspaco:
+          type: string
+          format: byte
+          example: "\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00"
+          
+    CadastroEspacoRequest:
+      type: object
+      properties:
+        schema:
+          $ref: '#/components/schemas/DadosEspaco'
+
+    ListaEspacosResponse:
+      type: object
+      properties:
+        listaEspacos:
+          type: array
+          items:
+            $ref: '#/components/schemas/DadosEspaco'
 
     SucessMessage:
       type: object

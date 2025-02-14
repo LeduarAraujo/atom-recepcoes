@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
  *  um status code correspondente ao erro, e não simplesmente um codigo 500 sem explicação do ocorrido.
  */
 @Slf4j
-@ControllerAdvice
+// @ControllerAdvice
 public class AgendaRecepcoesControllerHandler {
 
     @ExceptionHandler(NumberFormatException.class)
