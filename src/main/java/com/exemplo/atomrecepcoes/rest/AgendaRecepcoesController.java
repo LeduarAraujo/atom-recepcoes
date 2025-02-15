@@ -48,10 +48,10 @@ public class AgendaRecepcoesController implements ApiApi {
     @SuppressWarnings({ "rawtypes", "unchecked" })
     @Override
     public ResponseEntity<SucessMessageRepresentation> incluirEspaco(String tokenJwt, Long idFuncionario,
-            String nmEspaco, String dsEndereco, MultipartFile logoEspaco) {
+            String nmEspaco, String dsEndereco, String instagram, MultipartFile logoEspaco) {
         try {
             return ResponseEntity.ok().body(service.incluirEspaco(tokenJwt, idFuncionario,
-            nmEspaco, dsEndereco, logoEspaco));
+            nmEspaco, dsEndereco, instagram, logoEspaco));
         } catch (Exception ex) {
             return (ResponseEntity) ErrorFormat.convertToEntity(ex);
         } 

@@ -20,10 +20,10 @@ public class AgendaRecepcoesService {
     private final EspacosRepository espacosRepository;
 
     public SucessMessageRepresentation incluirEspaco(String tokenJwt, Long idFuncionario,
-    String nmEspaco, String dsEndereco, MultipartFile logoEspaco) {
+    String nmEspaco, String dsEndereco, String instagram, MultipartFile logoEspaco) {
         log.info("Incluindo espaço");
 
-        espacosRepository.save(EspacoMapper.representationToEntity(nmEspaco, dsEndereco, logoEspaco));
+        espacosRepository.save(EspacoMapper.representationToEntity(nmEspaco, dsEndereco, instagram, logoEspaco));
         return SucessMessageRepresentation.builder()
                 .message("Cadastrado com sucesso")
                 .code(0)

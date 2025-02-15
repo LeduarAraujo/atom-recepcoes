@@ -21,6 +21,7 @@ public class EspacoMapper {
                 .nmEspaco(resp.getNmEspaco())
                 .dsEndereco(resp.getDsEndereco())
                 .siAtivo(resp.getSiAtivo())
+                .instagram(resp.getInstagram())
                 .logoEspaco(resp.getLogoEspaco())
                 .build());
         });
@@ -29,11 +30,12 @@ public class EspacoMapper {
     }
 
     public static EspacoEntity representationToEntity(String nmEspaco, String dsEndereco,
-        MultipartFile logoEspaco) {   
+        String instagram, MultipartFile logoEspaco) {   
         EspacoEntity espaco = new EspacoEntity();
         espaco.setNmEspaco(nmEspaco);
         espaco.setDsEndereco(dsEndereco);
         espaco.setSiAtivo("S");
+        espaco.setInstagram(instagram);
         try {
             if (logoEspaco != null && logoEspaco.getBytes().length > 0) {
                 espaco.setLogoEspaco(logoEspaco.getBytes());

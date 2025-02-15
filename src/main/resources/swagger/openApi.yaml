@@ -299,6 +299,9 @@ components:
         dsEndereco:
           type: string
           example: "rua do sol n 23, recife-PE"
+        instagram:
+          type: string
+          example: "espaco1"
         logoEspaco:
             type: string
             format: binary
