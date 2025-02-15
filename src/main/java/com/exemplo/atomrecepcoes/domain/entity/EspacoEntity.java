@@ -24,7 +24,7 @@ public class EspacoEntity {
     @Column(name = "dsendereco")
     String dsEndereco;
 
-    @Column(name = "siAtivo")
+    @Column(name = "siativo")
     String siAtivo;
 
     @Column(name = "logoespaco")
