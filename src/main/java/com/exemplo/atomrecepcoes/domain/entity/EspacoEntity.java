@@ -24,6 +24,9 @@ public class EspacoEntity {
     @Column(name = "dsendereco")
     String dsEndereco;
 
+    @Column(name = "siAtivo")
+    String siAtivo;
+
     @Column(name = "logoespaco")
     byte[] logoEspaco;
 }

@@ -282,6 +282,9 @@ components:
         dsEndereco:
           type: string
           example: "rua do sol n 23, recife-PE"
+        siAtivo:
+          type: string
+          example: "S"
         logoEspaco:
           type: string
           format: byte

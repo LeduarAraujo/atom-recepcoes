@@ -20,6 +20,7 @@ public class EspacoMapper {
                 .cdEspaco(resp.getCdEspaco().intValue())
                 .nmEspaco(resp.getNmEspaco())
                 .dsEndereco(resp.getDsEndereco())
+                .siAtivo(resp.getSiAtivo())
                 .logoEspaco(resp.getLogoEspaco())
                 .build());
         });
@@ -32,6 +33,7 @@ public class EspacoMapper {
         EspacoEntity espaco = new EspacoEntity();
         espaco.setNmEspaco(nmEspaco);
         espaco.setDsEndereco(dsEndereco);
+        espaco.setSiAtivo("S");
         try {
             if (logoEspaco != null && logoEspaco.getBytes().length > 0) {
                 espaco.setLogoEspaco(logoEspaco.getBytes());
