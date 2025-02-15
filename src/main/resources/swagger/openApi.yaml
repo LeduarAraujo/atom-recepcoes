@@ -285,6 +285,9 @@ components:
         siAtivo:
           type: string
           example: "S"
+        instagram:
+          type: string
+          example: "espaco1"
         logoEspaco:
           type: string
           format: byte
