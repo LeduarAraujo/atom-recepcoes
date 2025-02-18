@@ -20,11 +20,12 @@ public enum ExceptionReasonEnum {
     TOKEN_INVALIDO(MalformedJwtException.class, HttpStatus.UNAUTHORIZED, "Unauthorized"),
     TOKEN_EXPIRADO(ExpiredJwtException.class,HttpStatus.UNAUTHORIZED, "Unauthorized - invalid session")
     ;
+    @SuppressWarnings("rawtypes")
     private Class exception;
     private HttpStatus statusCode;
     private String dsError;
 
-    public static ExceptionReasonEnum getEnum(Class param) {
+    public static ExceptionReasonEnum getEnum(@SuppressWarnings("rawtypes") Class param) {
         for (ExceptionReasonEnum valor : values()) {
             if (valor.exception == param) {
                 return valor;
